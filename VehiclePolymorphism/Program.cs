@@ -9,24 +9,24 @@ namespace VehiclePolymorphism {
         static void Main(string[] args) {
             Truck truck = new Truck();
             Vehicle vehicle = (Vehicle) truck;
-
-            Console.WriteLine("=== Vehicle Creator ===");
-            Console.WriteLine($"With a shipment of {truck.GetShipment}");
-            Console.WriteLine($"top speed is {vehicle.Calc_Topspeed(250)}km/h");
+            Console.WriteLine($"With a shipment of {truck.GetShipment}kg, the top speed is {vehicle.Calc_Topspeed()}km/h");
+            Console.ReadKey(true);
             vehicle.Horn();
-            Console.ReadKey();
+            Console.ReadKey(true);
         }
     }
 
     abstract class Vehicle {
-        protected int horsepowers = 0;
-        protected string color = "Red";
+        // Defining data
+        protected int horsepowers = 150;
+        protected string color = "red";
+        protected string name = "volvo";
 
         public Vehicle() {
-            Console.WriteLine(color);
+            // Not sure what to do here
         }
 
-        public abstract double Calc_Topspeed(int hp);
+        public abstract double Calc_Topspeed();
 
         public void Horn() {
             Console.WriteLine("honk hooonk");
@@ -34,14 +34,15 @@ namespace VehiclePolymorphism {
     }
 
     class Truck : Vehicle {
+        // Defining data
         private int shipment = 1200;
 
         public int GetShipment {
             get { return shipment; }
         }
         
-        public override double Calc_Topspeed(int hp) {
-            double topSpeed = (hp * 1.6) - (shipment/100);
+        public override double Calc_Topspeed() {
+            double topSpeed = (horsepowers * 1.6) - (shipment/100);
             return topSpeed;
         }
     }
